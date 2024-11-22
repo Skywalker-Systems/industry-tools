@@ -2,8 +2,7 @@ import { ToolStorage } from "@storage/ToolStorage";
 import { ethers } from "ethers";
 import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "../contracts/erc20";
 
-
-interface DeploymentParams {
+export type DeployContractInput = {
     sessionId: string;
     userId: string;
     characterId: string;
@@ -11,19 +10,16 @@ interface DeploymentParams {
     tokenSymbol: string;
     totalSupply: string;
     network: string;
-}
+    storage: ToolStorage;
+};
 
-export async function deployContract(
-    params: DeploymentParams,
-    storage: ToolStorage
-) {
+export async function deployContract(input: DeployContractInput) {
+    const { userId, characterId, tokenName, tokenSymbol, totalSupply, network, storage } = input;
     try {
-        const network = params.network
-
         const [wallet, rpc] = await Promise.all([
             storage.getItem<{ privateKey?: string }>(
-                `USER#${params.userId}`,
-                `WALLET#${params.characterId}`
+                `USER#${userId}`,
+                `WALLET#${characterId}`
             ),
             storage.getItem<{ httpEndpoint: string }>(
                 "RPC",
@@ -54,9 +50,9 @@ export async function deployContract(
         );
 
         const contract = await factory.deploy(
-            params.tokenName,
-            params.tokenSymbol,
-            params.totalSupply
+            tokenName,
+            tokenSymbol,
+            totalSupply
         );
 
         await contract.waitForDeployment();

@@ -2,19 +2,14 @@ import { ToolStorage } from "@storage/ToolStorage";
 import { Wallet } from "ethers";
 import { CharacterWallet, WalletResponse } from "..";
 
-
-
-type CreateWalletParams = {
+export type CreateWalletInput = {
     userId: string;
     characterId: string;
+    storage: ToolStorage;
 };
 
-export async function createWallet({
-    userId,
-    characterId,
-}: CreateWalletParams,
-    storage: ToolStorage
-): Promise<WalletResponse> {
+export async function createWallet(input: CreateWalletInput): Promise<WalletResponse> {
+    const { userId, characterId, storage } = input;
     try {
         const existingWallet = await storage.getItem<CharacterWallet>(
             `USER#${userId}`,

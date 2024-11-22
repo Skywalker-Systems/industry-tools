@@ -16,12 +16,12 @@ describe("getWallet", () => {
     } as ToolStorage;
 
     it("should retrieve wallet data successfully", async () => {
-        const result = await getWallet(
-            "user_123",
-            "char_123",
-            8453,
-            mockStorage
-        );
+        const result = await getWallet({
+            userId: "user_123",
+            characterId: "char_123",
+            chainId: 8453,
+            storage: mockStorage
+        });
 
         expect(result).to.have.property("wallet_data");
         expect(result.wallet_data).to.have.property("address");
@@ -29,24 +29,24 @@ describe("getWallet", () => {
     });
 
     it("should return error when wallet not found", async () => {
-        const result = await getWallet(
-            "user_456",
-            "char_456",
-            8453,
-            mockStorage
-        );
+        const result = await getWallet({
+            userId: "user_456",
+            characterId: "char_456",
+            chainId: 8453,
+            storage: mockStorage
+        });
 
         expect(result).to.have.property("error", "WalletNotFound");
         expect(result.message).to.include("No wallet found for character");
     });
 
     it("should return error when RPC not found", async () => {
-        const result = await getWallet(
-            "user_123",
-            "char_123",
-            1,
-            mockStorage
-        );
+        const result = await getWallet({
+            userId: "user_123",
+            characterId: "char_123",
+            chainId: 1,
+            storage: mockStorage
+        });
 
         expect(result).to.have.property("error", "RPCNotFound");
         expect(result.message).to.include("No RPC found for chain");

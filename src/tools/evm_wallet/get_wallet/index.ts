@@ -1,12 +1,15 @@
 import { ToolStorage } from "@storage/ToolStorage";
 import { ethers } from "ethers";
 
-export async function getWallet(
-    userId: string,
-    characterId: string,
-    chainId: number,
-    storage: ToolStorage
-) {
+export type GetWalletInput = {
+    userId: string;
+    characterId: string;
+    chainId: number;
+    storage: ToolStorage;
+};
+
+export async function getWallet(input: GetWalletInput) {
+    const { userId, characterId, chainId, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
             storage.getItem<{ privateKey?: string }>(
