@@ -1,0 +1,44 @@
+{
+  "name": "industry-tools",
+  "version": "0.0.1",
+  "description": "Industry Tools is a TypeScript library providing essential tools for the Industry AI Agent Platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "industry",
+    "tools",
+    "ai",
+    "agent",
+    "platform"
+  ],
+  "author": "Flynn Bundy",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@types/chai": "^5.0.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.1",
+    "babel-jest": "^29.7.0",
+    "chai": "^5.1.2",
+    "eslint": "^9.15.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.698.0",
+    "ethers": "^6.13.4"
+  }
+}

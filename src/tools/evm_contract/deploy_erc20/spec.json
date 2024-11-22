@@ -1,0 +1,94 @@
+{
+  "toolSpec": {
+    "name": "Deploy_ERC20_Contract",
+    "description": "Deploys an ERC20 token contract to a specified blockchain network",
+    "inputSchema": {
+      "json": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "User ID of the wallet owner",
+            "pattern": "^user_[a-zA-Z0-9]{27}$"
+          },
+          "characterId": {
+            "type": "string",
+            "description": "Character ID that owns the deploying wallet"
+          },
+          "network": {
+            "type": "string",
+            "enum": ["base", "polygon", "scroll"],
+            "default": "base",
+            "description": "Target blockchain network for deployment",
+            "examples": ["base"]
+          },
+          "tokenSymbol": {
+            "type": "string",
+            "description": "Token symbol (e.g. 'BTC')",
+            "maxLength": 11,
+            "pattern": "^[A-Z0-9]+$",
+            "examples": ["GOLD"]
+          },
+          "tokenName": {
+            "type": "string",
+            "description": "Full token name (e.g. 'Bitcoin')",
+            "maxLength": 64,
+            "examples": ["Golden Token"]
+          },
+          "totalSupply": {
+            "type": "string",
+            "description": "Total token supply in wei (raw units)",
+            "pattern": "^[0-9]+$",
+            "examples": ["1000000000000000000000000"]
+          }
+        },
+        "required": [
+          "userId",
+          "characterId",
+          "tokenName",
+          "tokenSymbol",
+          "totalSupply"
+        ]
+      }
+    },
+    "outputSchema": {
+      "json": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "contractAddress": {
+                "type": "string",
+                "description": "Deployed contract address",
+                "pattern": "^0x[a-fA-F0-9]{40}$"
+              },
+              "deployerBalance": {
+                "type": "string",
+                "description": "Token balance of deployer in wei"
+              },
+              "network": {
+                "type": "string",
+                "description": "Network where contract was deployed",
+                "enum": ["base", "polygon", "scroll"]
+              }
+            },
+            "required": ["contractAddress", "deployerBalance", "network"]
+          },
+          {
+            "properties": {
+              "error": {
+                "type": "string",
+                "description": "Error type if deployment fails"
+              },
+              "message": {
+                "type": "string",
+                "description": "Detailed error message"
+              }
+            },
+            "required": ["error", "message"]
+          }
+        ]
+      }
+    }
+  }
+}

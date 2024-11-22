@@ -1,0 +1,42 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Check out the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        registry-url: https://registry.npmjs.org/
+
+    # Install dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Build the project
+    - name: Build project
+      run: npm run build
+
+    # Bump the version number
+    - name: Bump version
+      run: npm version patch
+      env:
+        CI: true
+
+    # Publish to npm
+    - name: Publish to npm
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
