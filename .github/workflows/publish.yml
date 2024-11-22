@@ -21,6 +21,12 @@ jobs:
         node-version: 20
         registry-url: https://registry.npmjs.org/
 
+    # Configure Git
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
     # Install dependencies
     - name: Install dependencies
       run: npm install
