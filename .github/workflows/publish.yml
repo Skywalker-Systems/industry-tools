@@ -8,34 +8,33 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Explicitly grant write permissions
 
     steps:
-      # Check out the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
 
-      # Configure Git
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build the project
+      - name: Run tests
+        run: npm run test
+
       - name: Build project
         run: npm run build
 
-      # Bump the version number
       - name: Bump version
         id: bump_version
         run: |
@@ -44,28 +43,12 @@ jobs:
         env:
           CI: true
 
-      # Publish to npm
       - name: Publish to npm
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # Push the changes (version bump and tag) back to the repository
       - name: Push changes
         run: |
           git push origin main
           git push origin --tags
-
-      # Create GitHub release
-      - name: Create GitHub release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ env.version }}
-          release_name: "Release ${{ env.version }}"
-          body: |
-            This release includes the following changes:
-            - Auto-published via GitHub Actions
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
