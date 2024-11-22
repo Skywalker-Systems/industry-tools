@@ -1,3 +1,3 @@
-export * from './storage/ToolStorage';
+export * from './storage/';
 export * from './tools/';
 
