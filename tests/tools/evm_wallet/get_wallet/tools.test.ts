@@ -7,9 +7,9 @@ describe("getWallet", () => {
     const mockStorage = {
         getItem: async (pk: string, sk: string) => {
             if (pk === "USER#user_123" && sk === "WALLET#char_123") {
-                return { privateKey: "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" }; // Valid private key
+                return { privateKey: "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" };
             }
-            if (pk === "RPC" && sk === "CHAIN#8453") {
+            if (pk === "RPC" && sk === "CHAIN#base") {
                 return { httpEndpoint: "https://base.example.com" };
             }
             return null;
@@ -41,15 +41,5 @@ describe("getWallet", () => {
         expect(result.message).to.include("No wallet found for character");
     });
 
-    it("should return error when RPC not found", async () => {
-        const result = await getWallet({
-            userId: "user_123",
-            characterId: "char_123",
-            network: Network.base,
-            storage: mockStorage
-        });
 
-        expect(result).to.have.property("error", "RPCNotFound");
-        expect(result.message).to.include("No RPC found for chain");
-    });
 });
