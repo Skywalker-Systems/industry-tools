@@ -5,7 +5,7 @@ export const fetchSpec = async (toolName: string) => {
     // Get the path to our package's root
     const packagePath = require.resolve('industry-tools/package.json');
     const packageRoot = path.dirname(packagePath);
-    const specPath = path.join(packageRoot, 'dist', 'tools', toolName, 'spec.json');
+    const specPath = path.join(packageRoot, 'src', 'dist', 'tools', toolName, 'spec.json');
 
     try {
         const spec = await readFile(specPath, "utf8");
