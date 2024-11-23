@@ -8,10 +8,13 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
             `USER#${userId}`,
             `WALLETS#${characterId}`
         );
+        console.log(`existingWalletData: ${existingWalletData}`);
 
         let wallets = existingWalletData?.wallets || [];
+        console.log(`wallets: ${wallets}`);
         const existingNetworkWallet = wallets.find(w => w.network === network);
         if (existingNetworkWallet) {
+            console.log(`existingNetworkWallet: ${existingNetworkWallet}`);
             return {
                 wallet: { address: existingNetworkWallet.address },
                 message: "Existing wallet retrieved successfully"
@@ -19,8 +22,10 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
         }
 
         const wallet = Keypair.generate();
-        const secretKeyArray = Array.from(wallet.secretKey);
+        console.log(`wallet: ${wallet}`);
 
+        const secretKeyArray = Array.from(wallet.secretKey);
+        console.log(`secretKeyArray: ${secretKeyArray}`);
         const newWallet: CharacterWallet = {
             privateKey: secretKeyArray,
             address: wallet.publicKey.toBase58(),
@@ -28,10 +33,10 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
             createdAt: new Date().toISOString(),
             typename: "CharacterWallet"
         };
-
+        console.log(`newWallet: ${newWallet}`);
         // Add the new wallet to the wallets array
         wallets.push(newWallet);
-
+        console.log(`wallets: ${wallets}`);
         // Save the updated wallets array back to storage
         await storage.createItem(
             `USER#${userId}`,
@@ -42,8 +47,11 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
             }
         );
 
+        const outputWallet = wallet.publicKey.toBase58();
+        console.log(`outputWallet: ${outputWallet}`);
+
         return {
-            wallet: { address: wallet.publicKey.toBase58() },
+            wallet: { address: outputWallet },
             message: "Wallet created successfully"
         };
     } catch (error) {
