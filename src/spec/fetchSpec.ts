@@ -1,9 +1,11 @@
 import { readFile } from "fs/promises";
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 export const fetchSpec = async (toolName: string) => {
-    const basePath = process.env.LAMBDA_TASK_ROOT || process.cwd();
-    const specPath = path.join(basePath, 'node_modules', 'industry-tools', 'dist', 'tools', toolName, 'spec.json');
+    const currentFilePath = fileURLToPath(import.meta.url);
+    const packageRoot = path.resolve(path.dirname(currentFilePath), '..', '..');
+    const specPath = path.join(packageRoot, 'dist', 'tools', toolName, 'spec.json');
 
     try {
         const spec = await readFile(specPath, "utf8");
