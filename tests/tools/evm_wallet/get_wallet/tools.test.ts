@@ -23,8 +23,8 @@ describe("getWallet", () => {
             storage: mockStorage
         });
 
-        expect(result).to.have.property("wallet_data");
-        expect(result.wallet_data).to.have.property("address");
+        expect(result).to.have.property("wallet");
+        expect(result.wallet).to.have.property("address");
         expect(result.message).to.equal("Wallet data retrieved successfully");
     });
 
