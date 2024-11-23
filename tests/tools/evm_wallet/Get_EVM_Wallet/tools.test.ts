@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ToolStorage } from "../../../../src/storage/ToolStorage";
-import { getWallet } from "../../../../src/tools/Get_EVM_Wallet";
+import { getEVMWallet } from "../../../../src/tools/Get_EVM_Wallet";
 import { Network } from "../../../../src/utils/networks";
 
 describe("getWallet", () => {
@@ -17,7 +17,7 @@ describe("getWallet", () => {
     } as ToolStorage;
 
     it("should retrieve wallet data successfully", async () => {
-        const result = await getWallet({
+        const result = await getEVMWallet({
             userId: "user_123",
             characterId: "char_123",
             network: Network.base,
@@ -30,7 +30,7 @@ describe("getWallet", () => {
     });
 
     it("should return error when wallet not found", async () => {
-        const result = await getWallet({
+        const result = await getEVMWallet({
             userId: "user_456",
             characterId: "char_456",
             network: Network.base,
