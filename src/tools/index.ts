@@ -1,4 +1,4 @@
-export * from "./evm_contract/deploy_erc20";
-export * from "./evm_wallet/create_wallet";
-export * from "./evm_wallet/get_wallet";
+export * from "./Create_EVM_Wallet";
+export * from "./Deploy_EVM_ERC20_Contract";
+export * from "./Get_EVM_Wallet";
 

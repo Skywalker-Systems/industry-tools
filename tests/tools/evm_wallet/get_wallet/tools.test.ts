@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ToolStorage } from "../../../../src/storage/ToolStorage";
-import { getWallet } from "../../../../src/tools/evm_wallet/get_wallet";
+import { getWallet } from "../../../../src/tools/Get_EVM_Wallet";
 import { Network } from "../../../../src/utils/networks";
 
 describe("getWallet", () => {

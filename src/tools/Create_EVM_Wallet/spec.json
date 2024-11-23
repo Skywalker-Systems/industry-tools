@@ -1,7 +1,7 @@
 {
   "toolSpec": {
-    "name": "Get_EVM_Wallet_Tool",
-    "description": "Retrieves wallet data and creates a signer instance for a specific chain",
+    "name": "Create_EVM_Wallet",
+    "description": "Creates a new Ethereum wallet for a character or retrieves an existing one",
     "inputSchema": {
       "json": {
         "type": "object",
@@ -13,13 +13,12 @@
           },
           "characterId": {
             "type": "string",
-            "description": "The character ID associated with the wallet"
+            "description": "The character ID that the wallet will be associated with"
           },
           "network": {
             "type": "string",
-            "description": "The network name for RPC connection",
-            "enum": ["base", "polygon", "scroll"],
-            "examples": ["base", "polygon", "scroll"]
+            "description": "The network that the wallet will be associated with",
+            "enum": ["base", "polygon", "scroll"]
           }
         },
         "required": ["userId", "characterId", "network"]
@@ -42,7 +41,10 @@
               },
               "message": {
                 "type": "string",
-                "const": "Wallet data retrieved successfully"
+                "enum": [
+                  "Wallet created successfully",
+                  "Existing wallet retrieved successfully"
+                ]
               }
             },
             "required": ["wallet", "message"]
@@ -51,8 +53,7 @@
             "properties": {
               "error": {
                 "type": "string",
-                "enum": ["WalletNotFound", "RPCNotFound", "WalletError"],
-                "description": "Type of error encountered"
+                "description": "Error type if wallet creation fails"
               },
               "message": {
                 "type": "string",

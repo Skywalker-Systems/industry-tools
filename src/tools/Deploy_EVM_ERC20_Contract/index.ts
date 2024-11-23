@@ -1,7 +1,7 @@
 import { ToolStorage } from "@storage/ToolStorage";
+import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "@utils/contracts/erc20";
 import { Network } from "@utils/networks";
 import { ethers } from "ethers";
-import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "../contracts/erc20";
 
 export type DeployContractInput = {
     userId: string;

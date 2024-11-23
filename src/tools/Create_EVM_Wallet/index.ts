@@ -1,7 +1,7 @@
 import { ToolStorage } from "@storage/ToolStorage";
 import { Network } from "@utils/networks";
+import { CharacterWallet, WalletResponse } from "@utils/wallets";
 import { Wallet } from "ethers";
-import { CharacterWallet, WalletResponse } from "..";
 
 export type CreateWalletInput = {
     userId: string;
