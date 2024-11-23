@@ -1,7 +1,7 @@
 {
   "toolSpec": {
     "name": "Get_EVM_Wallet",
-    "description": "Retrieves an existing wallet for a specific character and chain",
+    "description": "Retrieves an existing wallet for a specific character and chain, this is used when there is a request to fetch the wallet for a character",
     "inputSchema": {
       "json": {
         "type": "object",

@@ -1,7 +1,7 @@
 {
   "toolSpec": {
     "name": "Create_EVM_Wallet",
-    "description": "Creates a new Ethereum wallet for a character or retrieves an existing one",
+    "description": "Creates a new Ethereum wallet for a character, this is used when there is a request to create a new wallet for a character",
     "inputSchema": {
       "json": {
         "type": "object",

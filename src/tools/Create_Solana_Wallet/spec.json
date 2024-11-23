@@ -1,7 +1,7 @@
 {
   "toolSpec": {
     "name": "Create_Solana_Wallet",
-    "description": "Creates a new Solana wallet for a character or retrieves an existing one",
+    "description": "Creates a new Solana wallet for a character, this is used when there is a request to create a new wallet on Solana for a character",
     "inputSchema": {
       "json": {
         "type": "object",
