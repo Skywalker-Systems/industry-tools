@@ -7,7 +7,9 @@
     "paths": {
       "@storage/*": ["src/storage/*"],
       "@tools/*": ["src/tools/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@spec/*": ["src/spec/*"],
+      "@utils/contracts": ["src/utils/contracts/*"]
     },
     "declaration": true,
     "outDir": "./dist",
