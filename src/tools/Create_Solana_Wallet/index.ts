@@ -1,5 +1,6 @@
+import { Keypair } from '@solana/web3.js';
+import { Network } from "@utils/networks";
 import { CharacterWallet, CharacterWallets, CreateWalletInput, WalletResponse } from "@utils/wallets";
-import { Wallet } from "ethers";
 
 export async function createWallet(input: CreateWalletInput): Promise<WalletResponse> {
     const { userId, characterId, network, storage } = input;
@@ -10,12 +11,9 @@ export async function createWallet(input: CreateWalletInput): Promise<WalletResp
             `WALLETS#${characterId}`
         );
 
-        // Initialize the wallets array
         let wallets = existingWalletData?.wallets || [];
 
-        // Check if a wallet for the specified network already exists
-        const existingNetworkWallet = wallets.find(w => w.network === network);
-
+        const existingNetworkWallet = wallets.find(w => w.network === 'solana');
         if (existingNetworkWallet) {
             return {
                 wallet: { address: existingNetworkWallet.address },
@@ -23,20 +21,21 @@ export async function createWallet(input: CreateWalletInput): Promise<WalletResp
             };
         }
 
-        // Create a new wallet
-        const wallet = Wallet.createRandom();
+        const wallet = Keypair.generate();
+        const secretKeyArray = Array.from(wallet.secretKey);
 
-        // Create a new wallet object
         const newWallet: CharacterWallet = {
-            privateKey: wallet.privateKey,
-            address: wallet.address,
-            network: network,
+            privateKey: secretKeyArray,
+            address: wallet.publicKey.toBase58(),
+            network: Network.solana,
             createdAt: new Date().toISOString(),
             typename: "CharacterWallet"
         };
 
+        // Add the new wallet to the wallets array
         wallets.push(newWallet);
 
+        // Save the updated wallets array back to storage
         await storage.createItem(
             `USER#${userId}`,
             `WALLETS#${characterId}`,
@@ -47,7 +46,7 @@ export async function createWallet(input: CreateWalletInput): Promise<WalletResp
         );
 
         return {
-            wallet: { address: wallet.address },
+            wallet: { address: wallet.publicKey.toBase58() },
             message: "Wallet created successfully"
         };
     } catch (error) {

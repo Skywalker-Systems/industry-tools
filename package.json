@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@aws-sdk/lib-dynamodb": "^3.698.0",
+    "@solana/web3.js": "^1.95.5",
     "ethers": "^6.13.4"
   }
 }

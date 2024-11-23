@@ -1,0 +1,70 @@
+{
+  "toolSpec": {
+    "name": "Create_Solana_Wallet",
+    "description": "Creates a new Solana wallet for a character or retrieves an existing one",
+    "inputSchema": {
+      "json": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The user ID that owns the wallet",
+            "pattern": "^user_[a-zA-Z0-9]{27}$"
+          },
+          "characterId": {
+            "type": "string",
+            "description": "The character ID that the wallet will be associated with"
+          },
+          "network": {
+            "type": "string",
+            "description": "The network that the wallet will be associated with, defaults to solana",
+            "enum": ["solana"],
+            "default": "solana"
+          }
+        },
+        "required": ["userId", "characterId"]
+      }
+    },
+    "outputSchema": {
+      "json": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "wallet": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "The Solana address of the wallet"
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "enum": [
+                  "Wallet created successfully",
+                  "Existing wallet retrieved successfully"
+                ]
+              }
+            },
+            "required": ["wallet", "message"]
+          },
+          {
+            "properties": {
+              "error": {
+                "type": "string",
+                "description": "Error type if wallet creation fails"
+              },
+              "message": {
+                "type": "string",
+                "description": "Detailed error message"
+              }
+            },
+            "required": ["error", "message"]
+          }
+        ]
+      }
+    }
+  }
+}
