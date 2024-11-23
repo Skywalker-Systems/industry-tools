@@ -50,6 +50,6 @@ export type CreateEVMWalletInput = {
 export type CreateSolanaWalletInput = {
     userId: string;
     characterId: string;
-    network: 'solana';
+    network: Network.solana;
     storage: ToolStorage;
 };

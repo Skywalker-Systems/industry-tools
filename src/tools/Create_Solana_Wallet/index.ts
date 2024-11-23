@@ -1,5 +1,4 @@
 import { Keypair } from '@solana/web3.js';
-import { Network } from '@utils/networks';
 import { CharacterWallet, CharacterWallets, CreateSolanaWalletInput, WalletResponse } from "@utils/wallets";
 
 export async function createSolanaWallet(input: CreateSolanaWalletInput): Promise<WalletResponse> {
@@ -25,7 +24,7 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
         const newWallet: CharacterWallet = {
             privateKey: secretKeyArray,
             address: wallet.publicKey.toBase58(),
-            network: Network.solana,
+            network,
             createdAt: new Date().toISOString(),
             typename: "CharacterWallet"
         };
