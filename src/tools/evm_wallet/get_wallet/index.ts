@@ -41,7 +41,7 @@ export async function getWallet(input: GetWalletInput) {
 
         return {
             message: "Wallet data retrieved successfully",
-            wallet_data: {
+            wallet: {
                 address: signer.address,
             },
         };

@@ -19,7 +19,7 @@ export async function createWallet(input: CreateWalletInput): Promise<WalletResp
         if (existingWallet?.privateKey) {
             const wallet = new Wallet(existingWallet.privateKey);
             return {
-                wallet_data: { address: wallet.address },
+                wallet: { address: wallet.address },
                 message: "Existing wallet retrieved successfully"
             };
         }
@@ -32,7 +32,7 @@ export async function createWallet(input: CreateWalletInput): Promise<WalletResp
         );
 
         return {
-            wallet_data: { address: wallet.address },
+            wallet: { address: wallet.address },
             message: "Wallet created successfully"
         };
     } catch (error) {

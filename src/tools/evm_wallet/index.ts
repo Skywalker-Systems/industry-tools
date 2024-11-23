@@ -1,5 +1,5 @@
 export type WalletResponse = {
-    wallet_data: { address: string };
+    wallet: { address: string };
     message: string;
 } | {
     error: string;
