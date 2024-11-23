@@ -62,17 +62,13 @@
                 "description": "Deployed contract address",
                 "pattern": "^0x[a-fA-F0-9]{40}$"
               },
-              "deployerBalance": {
-                "type": "string",
-                "description": "Token balance of deployer in wei"
-              },
               "network": {
                 "type": "string",
                 "description": "Network where contract was deployed",
                 "enum": ["base", "polygon", "scroll"]
               }
             },
-            "required": ["contractAddress", "deployerBalance", "network"]
+            "required": ["contractAddress", "network"]
           },
           {
             "properties": {
