@@ -1,4 +1,5 @@
-export * from "./contracts/erc20";
+export * from "./contracts";
 export * from "./networks";
 export * from "./wallets";
+
 
