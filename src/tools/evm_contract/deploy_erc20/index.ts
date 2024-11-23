@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "../contracts/erc20";
 
 export type DeployContractInput = {
-    sessionId: string;
     userId: string;
     characterId: string;
     tokenName: string;
