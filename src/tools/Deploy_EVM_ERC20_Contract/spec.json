@@ -19,7 +19,7 @@
             "type": "string",
             "enum": ["base", "polygon", "scroll"],
             "default": "base",
-            "description": "Target blockchain network for deployment",
+            "description": "Target blockchain network for deployment, defaults to base",
             "examples": ["base"]
           },
           "tokenSymbol": {

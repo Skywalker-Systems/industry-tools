@@ -17,12 +17,13 @@
           },
           "network": {
             "type": "string",
-            "description": "The network name for RPC connection",
+            "description": "The network name for RPC connection, defaults to base",
             "enum": ["base", "polygon", "scroll"],
-            "examples": ["base", "polygon", "scroll"]
+            "examples": ["base", "polygon", "scroll"],
+            "default": "base"
           }
         },
-        "required": ["userId", "characterId", "network"]
+        "required": ["userId", "characterId"]
       }
     },
     "outputSchema": {
