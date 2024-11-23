@@ -1,6 +1,6 @@
 {
   "name": "industry-tools",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Industry Tools is a TypeScript library providing essential tools for the Industry AI Agent Platform.",
   "scripts": {
     "test": "jest",
