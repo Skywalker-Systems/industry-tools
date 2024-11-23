@@ -6,7 +6,8 @@
     "baseUrl": "./",
     "paths": {
       "@storage/*": ["src/storage/*"],
-      "@tools/*": ["src/tools/*"]
+      "@tools/*": ["src/tools/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "declaration": true,
     "outDir": "./dist",

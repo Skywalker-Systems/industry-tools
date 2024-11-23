@@ -1,6 +1,7 @@
 import { expect } from "chai";
 import { ToolStorage } from "../../../../src/storage/ToolStorage";
 import { getWallet } from "../../../../src/tools/evm_wallet/get_wallet";
+import { Network } from "../../../../src/utils/networks";
 
 describe("getWallet", () => {
     const mockStorage = {
@@ -19,7 +20,7 @@ describe("getWallet", () => {
         const result = await getWallet({
             userId: "user_123",
             characterId: "char_123",
-            chainId: 8453,
+            network: Network.base,
             storage: mockStorage
         });
 
@@ -32,7 +33,7 @@ describe("getWallet", () => {
         const result = await getWallet({
             userId: "user_456",
             characterId: "char_456",
-            chainId: 8453,
+            network: Network.base,
             storage: mockStorage
         });
 
@@ -44,7 +45,7 @@ describe("getWallet", () => {
         const result = await getWallet({
             userId: "user_123",
             characterId: "char_123",
-            chainId: 1,
+            network: Network.base,
             storage: mockStorage
         });
 

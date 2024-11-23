@@ -1,6 +1,6 @@
 {
   "toolSpec": {
-    "name": "Deploy_ERC20_Contract",
+    "name": "Deploy_EVM_ERC20_Contract",
     "description": "Deploys an ERC20 token contract to a specified blockchain network",
     "inputSchema": {
       "json": {

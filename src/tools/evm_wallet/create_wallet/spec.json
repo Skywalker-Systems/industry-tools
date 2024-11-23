@@ -1,6 +1,6 @@
 {
   "toolSpec": {
-    "name": "Create_Wallet_Tool",
+    "name": "Create_EVM_Wallet_Tool",
     "description": "Creates a new Ethereum wallet for a character or retrieves an existing one",
     "inputSchema": {
       "json": {
@@ -14,9 +14,14 @@
           "characterId": {
             "type": "string",
             "description": "The character ID that the wallet will be associated with"
+          },
+          "network": {
+            "type": "string",
+            "description": "The network that the wallet will be associated with",
+            "enum": ["base", "polygon", "scroll"]
           }
         },
-        "required": ["userId", "characterId"]
+        "required": ["userId", "characterId", "network"]
       }
     },
     "outputSchema": {
@@ -25,7 +30,7 @@
         "oneOf": [
           {
             "properties": {
-              "wallet_data": {
+              "wallet": {
                 "type": "object",
                 "properties": {
                   "address": {
@@ -42,7 +47,7 @@
                 ]
               }
             },
-            "required": ["wallet_data", "message"]
+            "required": ["wallet", "message"]
           },
           {
             "properties": {

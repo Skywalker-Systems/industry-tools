@@ -1,6 +1,6 @@
 {
   "toolSpec": {
-    "name": "Get_Wallet_Tool",
+    "name": "Get_EVM_Wallet_Tool",
     "description": "Retrieves wallet data and creates a signer instance for a specific chain",
     "inputSchema": {
       "json": {
@@ -15,14 +15,14 @@
             "type": "string",
             "description": "The character ID associated with the wallet"
           },
-          "chainId": {
-            "type": "number",
-            "description": "The chain ID for RPC connection",
-            "enum": [1, 137, 8453, 534352],
-            "examples": [8453, 137]
+          "network": {
+            "type": "string",
+            "description": "The network name for RPC connection",
+            "enum": ["base", "polygon", "scroll"],
+            "examples": ["base", "polygon", "scroll"]
           }
         },
-        "required": ["userId", "characterId", "chainId"]
+        "required": ["userId", "characterId", "network"]
       }
     },
     "outputSchema": {
@@ -31,7 +31,7 @@
         "oneOf": [
           {
             "properties": {
-              "wallet_data": {
+              "wallet": {
                 "type": "object",
                 "properties": {
                   "address": {
@@ -45,7 +45,7 @@
                 "const": "Wallet data retrieved successfully"
               }
             },
-            "required": ["wallet_data", "message"]
+            "required": ["wallet", "message"]
           },
           {
             "properties": {

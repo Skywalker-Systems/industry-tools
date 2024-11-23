@@ -1,4 +1,5 @@
 import { ToolStorage } from "@storage/ToolStorage";
+import { Network } from "@utils/networks";
 import { ethers } from "ethers";
 import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "../contracts/erc20";
 
@@ -9,7 +10,7 @@ export type DeployContractInput = {
     tokenName: string;
     tokenSymbol: string;
     totalSupply: string;
-    network: string;
+    network: Network;
     storage: ToolStorage;
 };
 

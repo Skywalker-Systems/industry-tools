@@ -1,15 +1,16 @@
 import { ToolStorage } from "@storage/ToolStorage";
+import { Network } from "@utils/networks";
 import { ethers } from "ethers";
 
 export type GetWalletInput = {
     userId: string;
     characterId: string;
-    chainId: number;
+    network: Network;
     storage: ToolStorage;
 };
 
 export async function getWallet(input: GetWalletInput) {
-    const { userId, characterId, chainId, storage } = input;
+    const { userId, characterId, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
             storage.getItem<{ privateKey?: string }>(
@@ -18,7 +19,7 @@ export async function getWallet(input: GetWalletInput) {
             ),
             storage.getItem<{ httpEndpoint: string }>(
                 "RPC",
-                `CHAIN#${chainId}`
+                `CHAIN#${network}`
             )
         ]);
 
@@ -32,7 +33,7 @@ export async function getWallet(input: GetWalletInput) {
         if (!rpc) {
             return {
                 error: "RPCNotFound",
-                message: `No RPC found for chain ${chainId}`,
+                message: `No RPC found for network ${network}`,
             };
         }
 
