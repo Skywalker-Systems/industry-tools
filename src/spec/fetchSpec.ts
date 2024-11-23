@@ -1,8 +1,10 @@
 import { readFile } from "fs/promises";
-import path from "path";
 
 export const fetchSpec = async (toolName: string) => {
-    const specPath = path.join(__dirname, "..", "tools", toolName, "spec.json");
+    // Find the package in node_modules
+    const specPath = require.resolve(`industry-tools/tools/${toolName}/spec.json`, {
+        paths: [process.cwd()]
+    });
     const spec = await readFile(specPath, "utf8");
     return JSON.parse(spec);
 };
