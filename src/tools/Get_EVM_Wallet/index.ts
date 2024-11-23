@@ -9,7 +9,7 @@ export type GetWalletInput = {
     storage: ToolStorage;
 };
 
-export async function getWallet(input: GetWalletInput) {
+export async function getEVMWallet(input: GetWalletInput) {
     const { userId, characterId, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([

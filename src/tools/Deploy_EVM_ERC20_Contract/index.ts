@@ -3,7 +3,7 @@ import { Network } from "@utils/networks";
 import { ethers } from "ethers";
 import { ERC20_CONTRACT_ABI, ERC20_CONTRACT_BYTECODE } from "../../utils/contracts/erc20";
 
-export type DeployContractInput = {
+export type DeployEVMERC20ContractInput = {
     userId: string;
     characterId: string;
     tokenName: string;
@@ -13,7 +13,7 @@ export type DeployContractInput = {
     storage: ToolStorage;
 };
 
-export async function deployContract(input: DeployContractInput) {
+export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput) {
     const { userId, characterId, tokenName, tokenSymbol, totalSupply, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
