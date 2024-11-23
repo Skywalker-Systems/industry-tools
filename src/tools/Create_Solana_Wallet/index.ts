@@ -2,7 +2,7 @@ import { Keypair } from '@solana/web3.js';
 import { Network } from "@utils/networks";
 import { CharacterWallet, CharacterWallets, CreateWalletInput, WalletResponse } from "@utils/wallets";
 
-export async function createWallet(input: CreateWalletInput): Promise<WalletResponse> {
+export async function createSolanaWallet(input: CreateWalletInput): Promise<WalletResponse> {
     const { userId, characterId, network, storage } = input;
     try {
         // Fetch the existing CharacterWallet from storage
