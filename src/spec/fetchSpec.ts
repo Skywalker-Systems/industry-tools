@@ -1,24 +1,18 @@
 import { readFile } from "fs/promises";
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const fetchSpec = async (toolName: string) => {
-    // In Lambda, everything is in /var/task
-    const basePath = process.env.LAMBDA_TASK_ROOT || process.cwd();
-
     try {
-        const specPath = path.join(basePath, 'node_modules', 'industry-tools', 'dist', 'tools', toolName, 'spec.json');
+        // Resolve the path relative to the module's own directory
+        const specPath = path.join(__dirname, 'tools', toolName, 'spec.json');
         const spec = await readFile(specPath, "utf8");
         return JSON.parse(spec);
     } catch (error) {
-        // If that fails, try local development path
-        try {
-            const devSpecPath = path.join(basePath, 'dist', 'tools', toolName, 'spec.json');
-            const spec = await readFile(devSpecPath, "utf8");
-            return JSON.parse(spec);
-        } catch (devError) {
-            throw new Error(`Failed to load spec for tool ${toolName}. Paths tried:\n` +
-                `1. ${path.join(basePath, 'node_modules', 'industry-tools', 'dist', 'tools', toolName, 'spec.json')}\n` +
-                `2. ${path.join(basePath, 'dist', 'tools', toolName, 'spec.json')}`);
-        }
+        throw new Error(`Failed to load spec for tool ${toolName} from path \nError: ${error}`);
     }
 };
