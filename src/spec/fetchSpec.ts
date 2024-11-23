@@ -2,11 +2,13 @@ import { readFile } from "fs/promises";
 import path from 'path';
 
 export const fetchSpec = async (toolName: string) => {
-    // Get the path to the industry-tools package root
-    const packagePath = require.resolve('industry-tools/package.json');
-    const packageRoot = path.dirname(packagePath);
+    const basePath = process.env.LAMBDA_TASK_ROOT || process.cwd();
+    const specPath = path.join(basePath, 'node_modules', 'industry-tools', 'dist', 'tools', toolName, 'spec.json');
 
-    const specPath = path.join(packageRoot, 'dist', 'tools', toolName, 'spec.json');
-    const spec = await readFile(specPath, "utf8");
-    return JSON.parse(spec);
+    try {
+        const spec = await readFile(specPath, "utf8");
+        return JSON.parse(spec);
+    } catch (error) {
+        throw new Error(`Failed to load spec for tool ${toolName}: ${error}`);
+    }
 };
