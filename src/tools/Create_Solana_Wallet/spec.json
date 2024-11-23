@@ -42,10 +42,7 @@
               },
               "message": {
                 "type": "string",
-                "enum": [
-                  "Wallet created successfully",
-                  "Existing wallet retrieved successfully"
-                ]
+                "description": "Message indicating the success of the wallet creation"
               }
             },
             "required": ["wallet", "message"]
