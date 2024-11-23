@@ -49,7 +49,7 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
     } catch (error) {
         return {
             error: error instanceof Error ? error.name : 'WalletCreationError',
-            message: `Failed to create wallet: ${error instanceof Error ? error.message : String(error)}`
+            message: `Failed to create wallet: ${error}`
         };
     }
 }

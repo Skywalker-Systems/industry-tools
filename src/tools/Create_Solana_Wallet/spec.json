@@ -1,7 +1,7 @@
 {
   "toolSpec": {
     "name": "Create_Solana_Wallet",
-    "description": "Creates a new Solana wallet for a character, this is used when there is a request to create a new wallet on Solana for a character",
+    "description": "Creates a new Solana wallet for a character, this is used when there is a request to create a new wallet for a character",
     "inputSchema": {
       "json": {
         "type": "object",
@@ -18,7 +18,6 @@
           "network": {
             "type": "string",
             "description": "The network that the wallet will be associated with, defaults to solana",
-            "enum": ["solana"],
             "default": "solana"
           }
         },
@@ -36,7 +35,7 @@
                 "properties": {
                   "address": {
                     "type": "string",
-                    "description": "The Solana address of the wallet"
+                    "description": "The address of the wallet"
                   }
                 }
               },
