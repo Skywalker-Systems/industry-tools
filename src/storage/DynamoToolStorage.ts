@@ -32,7 +32,13 @@ export class DynamoToolStorage extends ToolStorage {
     constructor(region: string, tableName: string) {
         super();
         const dbClient = new DynamoDBClient({ region });
-        this.client = DynamoDBDocumentClient.from(dbClient);
+        this.client = DynamoDBDocumentClient.from(dbClient, {
+            marshallOptions: {
+                convertEmptyValues: true,
+                removeUndefinedValues: true,
+                convertClassInstanceToMap: true,
+            },
+        });
         this.tableName = tableName;
     }
 
