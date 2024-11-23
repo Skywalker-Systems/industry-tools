@@ -9,6 +9,7 @@ module.exports = {
         '^@storage/(.*)$': '<rootDir>/src/storage/$1',
         '^@tools/(.*)$': '<rootDir>/src/tools/$1',
         '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+        '^@spec/(.*)$': '<rootDir>/src/spec/$1',
     },
     transformIgnorePatterns: [
         'node_modules/(?!(chai)/)', // Transform `chai` and similar dependencies
