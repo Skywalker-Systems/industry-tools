@@ -1,7 +1,11 @@
-import { CharacterWallet, CharacterWallets, CreateWalletInput, WalletResponse } from "@utils/wallets";
+import { CharacterWallet, CharacterWallets, CreateEVMWalletInput } from "@utils/wallets";
 import { Wallet } from "ethers";
 
-export async function createEVMWallet(input: CreateWalletInput): Promise<WalletResponse> {
+export async function createEVMWallet(input: CreateEVMWalletInput): Promise<{
+    wallet?: { address: string };
+    message: string;
+    error?: string;
+}> {
     const { userId, characterId, network, storage } = input;
     try {
         // Fetch the existing CharacterWallet from storage

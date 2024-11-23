@@ -13,7 +13,16 @@ export type DeployEVMERC20ContractInput = {
     storage: ToolStorage;
 };
 
-export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput) {
+export type DeployEVMERC20ContractOutput = {
+    contractAddress: string;
+    network: Network;
+    message: string;
+} | {
+    error: string;
+    message: string;
+};
+
+export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput): Promise<DeployEVMERC20ContractOutput> {
     const { userId, characterId, tokenName, tokenSymbol, totalSupply, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
@@ -60,7 +69,8 @@ export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput)
 
         return {
             contractAddress: deployedAddress,
-            network
+            network: network,
+            message: "Contract deployed successfully"
         };
 
     } catch (error) {

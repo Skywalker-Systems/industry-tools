@@ -36,7 +36,7 @@
                 "properties": {
                   "address": {
                     "type": "string",
-                    "description": "The Ethereum address of the wallet"
+                    "description": "The address of the wallet"
                   }
                 }
               },

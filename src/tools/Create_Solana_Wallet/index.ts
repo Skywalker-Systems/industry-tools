@@ -1,18 +1,17 @@
 import { Keypair } from '@solana/web3.js';
-import { CharacterWallet, CharacterWallets, CreateWalletInput, WalletResponse } from "@utils/wallets";
+import { Network } from '@utils/networks';
+import { CharacterWallet, CharacterWallets, CreateSolanaWalletInput, WalletResponse } from "@utils/wallets";
 
-export async function createSolanaWallet(input: CreateWalletInput): Promise<WalletResponse> {
+export async function createSolanaWallet(input: CreateSolanaWalletInput): Promise<WalletResponse> {
     const { userId, characterId, network, storage } = input;
     try {
-        // Fetch the existing CharacterWallet from storage
         const existingWalletData = await storage.getItem<CharacterWallets>(
             `USER#${userId}`,
             `WALLETS#${characterId}`
         );
 
         let wallets = existingWalletData?.wallets || [];
-
-        const existingNetworkWallet = wallets.find(w => w.network === 'solana');
+        const existingNetworkWallet = wallets.find(w => w.network === network);
         if (existingNetworkWallet) {
             return {
                 wallet: { address: existingNetworkWallet.address },
@@ -26,7 +25,7 @@ export async function createSolanaWallet(input: CreateWalletInput): Promise<Wall
         const newWallet: CharacterWallet = {
             privateKey: secretKeyArray,
             address: wallet.publicKey.toBase58(),
-            network,
+            network: Network.solana,
             createdAt: new Date().toISOString(),
             typename: "CharacterWallet"
         };

@@ -1,16 +1,8 @@
-import { ToolStorage } from "@storage/ToolStorage";
-import { Network } from "@utils/networks";
+import { GetEVMWalletInput, GetWalletError, GetWalletSuccess } from "@utils/wallets";
 import { ethers } from "ethers";
 
-export type GetWalletInput = {
-    userId: string;
-    characterId: string;
-    network: Network;
-    storage: ToolStorage;
-};
-
-export async function getEVMWallet(input: GetWalletInput) {
-    const { userId, characterId, network, storage } = input;
+export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletSuccess | GetWalletError> {
+    const { userId, characterId, network = 'base', storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
             storage.getItem<{ privateKey?: string }>(
@@ -41,15 +33,15 @@ export async function getEVMWallet(input: GetWalletInput) {
         const signer = new ethers.Wallet(wallet.privateKey, provider);
 
         return {
-            message: "Wallet data retrieved successfully",
             wallet: {
                 address: signer.address,
             },
+            message: "Wallet data retrieved successfully"
         };
-    } catch (error: any) {
+    } catch (error) {
         return {
-            error: error.name || "WalletError",
-            message: `Failed to retrieve wallet data: ${error.message}`,
+            error: "WalletError",
+            message: `Failed to retrieve wallet data: ${error instanceof Error ? error.message : String(error)}`,
         };
     }
 }

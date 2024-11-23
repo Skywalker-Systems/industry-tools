@@ -19,7 +19,6 @@
             "type": "string",
             "description": "The network name for RPC connection, defaults to base",
             "enum": ["base", "polygon", "scroll"],
-            "examples": ["base", "polygon", "scroll"],
             "default": "base"
           }
         },
@@ -37,9 +36,11 @@
                 "properties": {
                   "address": {
                     "type": "string",
-                    "description": "The Ethereum address of the wallet"
+                    "description": "The Ethereum address of the wallet",
+                    "pattern": "^0x[a-fA-F0-9]{40}$"
                   }
-                }
+                },
+                "required": ["address"]
               },
               "message": {
                 "type": "string",
@@ -52,8 +53,7 @@
             "properties": {
               "error": {
                 "type": "string",
-                "enum": ["WalletNotFound", "RPCNotFound", "WalletError"],
-                "description": "Type of error encountered"
+                "enum": ["WalletNotFound", "RPCNotFound", "WalletError"]
               },
               "message": {
                 "type": "string",

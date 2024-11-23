@@ -9,6 +9,25 @@ export type WalletResponse = {
     message: string;
 };
 
+export type GetWalletSuccess = {
+    wallet: {
+        address: string;
+    };
+    message: "Wallet data retrieved successfully";
+};
+
+export type GetWalletError = {
+    error: "WalletNotFound" | "RPCNotFound" | "WalletError";
+    message: string;
+};
+
+export type GetEVMWalletInput = {
+    userId: string;
+    characterId: string;
+    network?: Network;
+    storage: ToolStorage;
+};
+
 export type CharacterWallets = {
     wallets: CharacterWallet[];
 };
@@ -21,9 +40,16 @@ export type CharacterWallet = {
     typename: "CharacterWallet";
 };
 
-export type CreateWalletInput = {
+export type CreateEVMWalletInput = {
     userId: string;
     characterId: string;
     network: Network;
+    storage: ToolStorage;
+};
+
+export type CreateSolanaWalletInput = {
+    userId: string;
+    characterId: string;
+    network: 'solana';
     storage: ToolStorage;
 };

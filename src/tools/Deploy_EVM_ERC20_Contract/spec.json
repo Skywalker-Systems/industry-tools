@@ -66,9 +66,13 @@
                 "type": "string",
                 "description": "Network where contract was deployed",
                 "enum": ["base", "polygon", "scroll"]
+              },
+              "message": {
+                "type": "string",
+                "const": "Contract deployed successfully"
               }
             },
-            "required": ["contractAddress", "network"]
+            "required": ["contractAddress", "network", "message"]
           },
           {
             "properties": {
