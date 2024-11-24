@@ -39,8 +39,7 @@
           },
           "address": {
             "type": "string",
-            "description": "The Ethereum address of the wallet",
-            "pattern": "^0x[a-fA-F0-9]{40}$"
+            "description": "The Ethereum address of the wallet"
           }
         },
         "required": ["message", "error"]
