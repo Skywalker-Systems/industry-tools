@@ -1,6 +1,6 @@
-import { Network } from "@utils/networks";
 import { CharacterWallet, CharacterWallets, CreateEVMWalletInput, WalletResponse } from "@utils/wallets";
 import { Wallet } from "ethers";
+import { Network } from '../../utils/networks';
 
 export async function createEVMWallet(input: CreateEVMWalletInput): Promise<WalletResponse> {
     const { userId, characterId, network, storage } = input;
