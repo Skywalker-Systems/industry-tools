@@ -19,6 +19,7 @@ export async function getEVMWallet(input: GetEVMWalletInput) {
             return {
                 error: "WalletNotFound",
                 message: `No wallet found for character ${characterId}`,
+                address: "",
             };
         }
 
@@ -26,6 +27,7 @@ export async function getEVMWallet(input: GetEVMWalletInput) {
             return {
                 error: "RPCNotFound",
                 message: `No RPC found for network ${network}`,
+                address: "",
             };
         }
 
@@ -35,15 +37,14 @@ export async function getEVMWallet(input: GetEVMWalletInput) {
         return {
             message: `Wallet found with address ${signer.address}`,
             error: "",
-            wallet: {
-                address: signer.address,
-            }
+            address: signer.address,
         };
     } catch (error) {
         console.log(error);
         return {
             error: "WalletError",
             message: `Failed to retrieve wallet data: ${error instanceof Error ? error.message : String(error)}`,
+            address: "",
         };
     }
 }

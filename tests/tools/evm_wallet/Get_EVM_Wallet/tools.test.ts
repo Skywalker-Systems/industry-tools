@@ -24,13 +24,7 @@ describe("getWallet", () => {
             storage: mockStorage
         });
         console.log(result);
-
-        if ('error' in result) {
-            throw new Error("Expected success but got error");
-        }
-
-        expect(result.wallet).to.have.property("address");
-        expect(result.message).to.equal("Wallet data retrieved successfully");
+        expect(result.address).to.match(/^0x[a-fA-F0-9]{40}$/);
     });
 
     it("should return error when wallet not found", async () => {

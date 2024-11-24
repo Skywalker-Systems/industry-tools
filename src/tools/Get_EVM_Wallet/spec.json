@@ -37,15 +37,10 @@
             "type": "string",
             "description": "Error type if any, empty string if successful"
           },
-          "wallet": {
-            "type": "object",
-            "properties": {
-              "address": {
-                "type": "string",
-                "description": "The Ethereum address of the wallet",
-                "pattern": "^0x[a-fA-F0-9]{40}$"
-              }
-            }
+          "address": {
+            "type": "string",
+            "description": "The Ethereum address of the wallet",
+            "pattern": "^0x[a-fA-F0-9]{40}$"
           }
         },
         "required": ["message", "error"]
