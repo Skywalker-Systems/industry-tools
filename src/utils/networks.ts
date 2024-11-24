@@ -1,6 +1,6 @@
 export enum Network {
-    base = "base",
-    polygon = "polygon",
-    scroll = "scroll",
-    solana = "solana"
+    BASE = "base",
+    POLYGON = "polygon",
+    SCROLL = "scroll",
+    SOLANA = "solana"
 }

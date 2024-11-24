@@ -9,7 +9,7 @@ describe("getWallet", () => {
             if (pk === "USER#user_123" && sk === "WALLET#char_123") {
                 return { privateKey: "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" };
             }
-            if (pk === "RPC" && sk === "CHAIN#base") {
+            if (pk === "RPC" && sk === "CHAIN#BASE") {
                 return { httpEndpoint: "https://base.example.com" };
             }
             return null;
@@ -20,9 +20,10 @@ describe("getWallet", () => {
         const result = await getEVMWallet({
             userId: "user_123",
             characterId: "char_123",
-            network: Network.base,
+            network: Network.BASE,
             storage: mockStorage
         });
+        console.log(result);
 
         if ('error' in result) {
             throw new Error("Expected success but got error");
@@ -36,7 +37,7 @@ describe("getWallet", () => {
         const result = await getEVMWallet({
             userId: "user_456",
             characterId: "char_456",
-            network: Network.base,
+            network: Network.BASE,
             storage: mockStorage
         });
 
@@ -57,7 +58,7 @@ describe("getWallet", () => {
         const result = await getEVMWallet({
             userId: "user_123",
             characterId: "char_123",
-            network: Network.base,
+            network: Network.BASE,
             storage: mockStorageNoRPC
         });
 
@@ -81,7 +82,7 @@ describe("getWallet", () => {
         const result = await getEVMWallet({
             userId: "user_123",
             characterId: "char_123",
-            network: Network.base,
+            network: Network.BASE,
             storage: mockStorageInvalidWallet
         });
 

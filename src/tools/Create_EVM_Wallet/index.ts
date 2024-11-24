@@ -1,21 +1,17 @@
+import { Network } from "@utils/networks";
 import { CharacterWallet, CharacterWallets, CreateEVMWalletInput, WalletResponse } from "@utils/wallets";
 import { Wallet } from "ethers";
 
 export async function createEVMWallet(input: CreateEVMWalletInput): Promise<WalletResponse> {
     const { userId, characterId, network, storage } = input;
     try {
-        // Fetch the existing CharacterWallet from storage
         const existingWalletData = await storage.getItem<CharacterWallets>(
             `USER#${userId}`,
             `WALLETS#${characterId}`
         );
 
-        // Initialize the wallets array
         let wallets = existingWalletData?.wallets || [];
-
-        // Check if a wallet for the specified network already exists
-        const existingNetworkWallet = wallets.find(w => w.network === network);
-
+        const existingNetworkWallet = wallets.find(w => w.network.toUpperCase() === network.toUpperCase());
         if (existingNetworkWallet) {
             return {
                 wallet: { address: existingNetworkWallet.address },
@@ -23,14 +19,11 @@ export async function createEVMWallet(input: CreateEVMWalletInput): Promise<Wall
             };
         }
 
-        // Create a new wallet
         const wallet = Wallet.createRandom();
-
-        // Create a new wallet object
         const newWallet: CharacterWallet = {
             privateKey: wallet.privateKey,
             address: wallet.address,
-            network: network,
+            network: network.toUpperCase() as Network,
             createdAt: new Date().toISOString(),
             typename: "CharacterWallet"
         };

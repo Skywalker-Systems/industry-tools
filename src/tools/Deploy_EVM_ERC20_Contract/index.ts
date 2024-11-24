@@ -32,7 +32,7 @@ export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput)
             ),
             storage.getItem<{ httpEndpoint: string }>(
                 "RPC",
-                `CHAIN#${network}`
+                `CHAIN#${network.toUpperCase()}`
             )
         ]);
 

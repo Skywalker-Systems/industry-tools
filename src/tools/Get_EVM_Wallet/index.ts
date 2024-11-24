@@ -2,7 +2,7 @@ import { GetEVMWalletInput, GetWalletError, GetWalletSuccess } from "@utils/wall
 import { ethers } from "ethers";
 
 export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletSuccess | GetWalletError> {
-    const { userId, characterId, network = 'base', storage } = input;
+    const { userId, characterId, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
             storage.getItem<{ privateKey?: string }>(
@@ -11,7 +11,7 @@ export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletS
             ),
             storage.getItem<{ httpEndpoint: string }>(
                 "RPC",
-                `CHAIN#${network}`
+                `CHAIN#${network?.toUpperCase()}`
             )
         ]);
 
