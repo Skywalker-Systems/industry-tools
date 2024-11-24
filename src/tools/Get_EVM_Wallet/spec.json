@@ -28,41 +28,27 @@
     "outputSchema": {
       "json": {
         "type": "object",
-        "oneOf": [
-          {
-            "properties": {
-              "wallet": {
-                "type": "object",
-                "properties": {
-                  "address": {
-                    "type": "string",
-                    "description": "The Ethereum address of the wallet",
-                    "pattern": "^0x[a-fA-F0-9]{40}$"
-                  }
-                },
-                "required": ["address"]
-              },
-              "message": {
-                "type": "string",
-                "const": "Wallet data retrieved successfully"
-              }
-            },
-            "required": ["wallet", "message"]
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Contains success data or error details"
           },
-          {
+          "error": {
+            "type": "string",
+            "description": "Error type if any, empty string if successful"
+          },
+          "wallet": {
+            "type": "object",
             "properties": {
-              "error": {
+              "address": {
                 "type": "string",
-                "enum": ["WalletNotFound", "RPCNotFound", "WalletError"]
-              },
-              "message": {
-                "type": "string",
-                "description": "Detailed error message"
+                "description": "The Ethereum address of the wallet",
+                "pattern": "^0x[a-fA-F0-9]{40}$"
               }
-            },
-            "required": ["error", "message"]
+            }
           }
-        ]
+        },
+        "required": ["message", "error"]
       }
     }
   }

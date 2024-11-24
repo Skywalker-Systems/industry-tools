@@ -1,7 +1,7 @@
-import { GetEVMWalletInput, GetWalletError, GetWalletSuccess } from "@utils/wallets";
+import { GetEVMWalletInput } from "@utils/wallets";
 import { ethers } from "ethers";
 
-export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletSuccess | GetWalletError> {
+export async function getEVMWallet(input: GetEVMWalletInput) {
     const { userId, characterId, network, storage } = input;
     try {
         const [wallet, rpc] = await Promise.all([
@@ -33,10 +33,11 @@ export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletS
         const signer = new ethers.Wallet(wallet.privateKey, provider);
 
         return {
+            message: `Wallet found with address ${signer.address}`,
+            error: "",
             wallet: {
                 address: signer.address,
-            },
-            message: "Wallet data retrieved successfully"
+            }
         };
     } catch (error) {
         console.log(error);
