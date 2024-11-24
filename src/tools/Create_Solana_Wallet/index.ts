@@ -47,7 +47,7 @@ export async function createSolanaWallet(input: CreateSolanaWalletInput): Promis
             message: "Wallet created successfully"
         };
     } catch (error) {
-        console.error(error);
+        console.log(error);
         return {
             error: 'WalletCreationError',
             message: `Failed to create wallet: ${error}`

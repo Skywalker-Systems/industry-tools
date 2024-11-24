@@ -44,6 +44,7 @@ export async function createEVMWallet(input: CreateEVMWalletInput): Promise<Wall
             message: "Wallet created successfully"
         };
     } catch (error) {
+        console.log(error);
         return {
             error: error instanceof Error ? error.name : 'WalletCreationError',
             message: `Failed to create wallet: ${error instanceof Error ? error.message : String(error)}`

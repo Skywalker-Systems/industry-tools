@@ -74,6 +74,7 @@ export async function deployEVMERC20Contract(input: DeployEVMERC20ContractInput)
         };
 
     } catch (error) {
+        console.log(error);
         return {
             error: error instanceof Error ? error.name : 'DeploymentError',
             message: `Failed to deploy contract: ${error instanceof Error ? error.message : String(error)}`

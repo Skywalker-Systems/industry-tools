@@ -39,6 +39,7 @@ export async function getEVMWallet(input: GetEVMWalletInput): Promise<GetWalletS
             message: "Wallet data retrieved successfully"
         };
     } catch (error) {
+        console.log(error);
         return {
             error: "WalletError",
             message: `Failed to retrieve wallet data: ${error instanceof Error ? error.message : String(error)}`,
